@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:BudgetApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BudgetApp.Views.LoginView"
+			 x:DataType="vm:LoginViewModel">
+	<Design.DataContext>
+		<vm:LoginViewModel/>
+	</Design.DataContext>
+	<Grid>
+		<Grid RowDefinitions="20,auto, *, auto" IsVisible="{Binding !ShowSignUpView}">
+			<TextBlock Grid.Row="1" Text="Log In" HorizontalAlignment="Center" FontSize="20" Margin="10" Padding="0"/>
+			<StackPanel Grid.Row="2">
+				<Label Content="Email" Margin="10 10 10 0"/>
+				<TextBox Text="{Binding	Email, Mode=TwoWay}" Margin="10 0 10 10" Watermark="user@email.com"/>
+				<Label Content="Password" Margin="10 10 10 0"/>
+				<TextBox Text="{Binding	Password, Mode=TwoWay}" Margin="10 0 10 10" PasswordChar="*"/>
+				<TextBlock Text="{Binding ErrorMessage}" IsVisible="{Binding ShowError}" Foreground="Red" Margin="10"/>
+				<CheckBox Content="Remember me" Margin="10 10 10 0" IsChecked="{Binding RememberMe}"/>
+			</StackPanel>
+			<StackPanel Grid.Row="2" VerticalAlignment="Bottom">
+				<Button Classes="Modify" Content="Log in" Command="{Binding LoginCommand}" IsEnabled="{Binding CanLogin}"/>
+				<Button Classes="Modify" Content="Sign up" Command="{Binding SignUpCommand}"/>
+			</StackPanel>
+		</Grid>
+		<Grid RowDefinitions="20, auto, *, auto" IsVisible="{Binding ShowSignUpView}">
+			<TextBlock Grid.Row="1" Text="Sign Up" HorizontalAlignment="Center" FontSize="20" Margin="10" Padding="0"/>
+			<StackPanel Grid.Row="2">
+				<Label Content="Email" Margin="10 10 10 0"/>
+				<TextBox Text="{Binding	Email, Mode=TwoWay}" Margin="10 0 10 10" Watermark="user@email.com"/>
+				<Label Content="Password" Margin="10 10 10 0"/>
+				<TextBox Text="{Binding	Password, Mode=TwoWay}" Margin="10 0 10 10" Watermark="At least 6 characters"/>
+				<Label Content="Confirm Password" Margin="10 10 10 0"/>
+				<TextBox Text="{Binding	ConfirmPassword, Mode=TwoWay}" Margin="10 0 10 10"  Watermark="At least 6 characters"/>
+				<TextBlock Text="{Binding ErrorMessage}" IsVisible="{Binding ShowError}" Foreground="Red" Margin="10"/>
+			</StackPanel>
+			<StackPanel Grid.Row="2" VerticalAlignment="Bottom">
+				<Button Classes="Modify" Content="Sign up" IsEnabled="{Binding CanSignUp}" Command="{Binding SignUpNewCommand}"/>
+				<Button Classes="Modify" Content="Cancel" Command="{Binding CancelCommand}"/>
+			</StackPanel>
+		</Grid>
+	</Grid>
+</UserControl>

@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:BudgetApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="365" d:DesignHeight="650"
+             x:Class="BudgetApp.Views.IncomeView"
+			 x:DataType="vm:IncomeViewModel">
+	<Design.DataContext>
+		<vm:IncomeViewModel />
+	</Design.DataContext>
+	<Grid RowDefinitions="40, *, auto">
+		<StackPanel Grid.Row="1">
+			<Label Content="Name of the Expense" Margin="10 10 10 0"/>
+			<TextBox x:Name="MyTextBox" Text="{Binding	Name, Mode=OneWay}" Margin="10 0 10 10"/>
+			<Label Content="Amount" Margin="10 10 10 0"/>
+			<NumericUpDown x:Name="MyNumericUpDown" Value="{Binding Amount, Mode=OneWay}" Increment="0.01" Margin="10 0 10 10"/>
+			<Label Content="Tag" Margin="10 10 10 0"/>
+			<TextBox x:Name="MyTagBox" Text="{Binding Tag, Mode=OneWay}" Watermark="Salary" Margin="10 0 10 10"/>
+		</StackPanel>
+		<StackPanel Grid.Row="2" VerticalAlignment="Bottom">
+			<Button Classes="Modify" Content="Save" Command="{Binding SaveCommand}">
+				<Button.CommandParameter>
+					<MultiBinding>
+						<Binding ElementName="MyTextBox" Path="Text"/>
+						<Binding ElementName="MyNumericUpDown" Path="Value"/>
+						<Binding ElementName="MyTagBox" Path="Text"/>
+					</MultiBinding>
+				</Button.CommandParameter>
+			</Button>
+			<Button Classes="Modify" Content="Cancel" Command="{Binding CancelCommand}"/>
+		</StackPanel>
+	</Grid>
+</UserControl>

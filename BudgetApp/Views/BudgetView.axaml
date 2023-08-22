@@ -1,0 +1,94 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:BudgetApp.ViewModels"
+			 xmlns:converters="clr-namespace:BudgetApp.Converters"
+			 xmlns:local="using:AvaloniaSample"
+			 xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+			 xmlns:lvcore="clr-namespace:LiveChartsCore;assembly=LiveChartsCore"
+             mc:Ignorable="d" d:DesignWidth="365" d:DesignHeight="650"
+             x:Class="BudgetApp.Views.BudgetView"
+			 x:DataType="vm:BudgetViewModel">
+	<Design.DataContext>
+		<vm:BudgetViewModel />
+	</Design.DataContext>
+	<UserControl.Resources>
+		<converters:DoubleWithSignConverter x:Key="DoubleWithSignConverter" />
+	</UserControl.Resources>
+	<UserControl.Styles>
+	</UserControl.Styles>
+	<Grid RowDefinitions="auto, auto, auto, *, auto">
+		<StackPanel>
+			<TextBlock Text="Budget" HorizontalAlignment="Center" FontSize="20" Margin="10" Padding="0"/>
+			<Separator Height="2" Background="Black" Margin="0 0 0 2"/>
+		</StackPanel>
+		<ListBox Grid.Row="1" HorizontalAlignment="Center" Margin="10 0"
+				 ItemsSource="{Binding	Months}" SelectedItem="{Binding SelectedMonth, Mode=TwoWay}"
+				 Background="Transparent"
+				 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+				 ScrollViewer.HorizontalSnapPointsType="Mandatory">
+			<ListBox.Styles>
+				<Style Selector="ListBoxItem">
+					<Setter	Property="CornerRadius" Value="30"/>
+					<Setter	Property="Margin" Value="10"/>
+				</Style>
+				<!--<Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+					<Setter Property="Background" Value="Black"/>
+				</Style>-->
+			</ListBox.Styles>
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Horizontal"/>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+		</ListBox>
+		<Border Grid.Row="2" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="White" Padding="5" Margin="0 10 0 0" CornerRadius="30" >
+			<TextBlock Text="{Binding ProfitLoss, Converter={StaticResource DoubleWithSignConverter}}" FontSize="20"/>
+		</Border>
+		<ToggleButton IsChecked="{Binding UseRacingBars}" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0" Width="30">
+			<Image Source="/Assets/Images/graph.png"/>
+			<!--<ToggleButton.Styles>
+				<Style Selector="ToggleButton:checked" >
+					<Setter Property="Background" Value="Black"/>
+				</Style>
+			</ToggleButton.Styles>-->
+		</ToggleButton>
+		<lvc:PieChart Grid.Row="3"
+					  Series="{Binding Series}"
+					  InitialRotation="-90"
+					  MaxAngle="270"
+					  Total="{Binding Total}"
+					  IsVisible="{Binding !UseRacingBars}">
+		</lvc:PieChart>
+		<lvc:CartesianChart
+					Grid.Row="3"
+					Margin="10"
+					Padding="0"
+					Series="{Binding SeriesBars}"
+					XAxes="{Binding XAxes}"
+					YAxes="{Binding YAxes}"
+					TooltipPosition="Hidden"
+					IsVisible="{Binding	UseRacingBars}">
+		</lvc:CartesianChart>
+		<ListBox Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+				 Margin="10 0" ItemsSource="{Binding Tags}"
+				 Background="Transparent"
+				 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+				 ScrollViewer.HorizontalSnapPointsType="Mandatory"
+				 SelectionMode="Multiple,Toggle"
+				 SelectionChanged="TagListBoxSelectionChanged">
+			<ListBox.Styles>
+				<Style Selector="ListBoxItem">
+					<Setter	Property="CornerRadius" Value="30"/>
+					<Setter	Property="Margin" Value="10"/>
+				</Style>
+			</ListBox.Styles>
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Horizontal"/>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+		</ListBox>
+	</Grid>
+</UserControl>

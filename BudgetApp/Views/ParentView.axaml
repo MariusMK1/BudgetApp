@@ -1,0 +1,57 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:BudgetApp.ViewModels"
+			 xmlns:views="clr-namespace:BudgetApp.Views"
+			 xmlns:local="clr-namespace:BudgetApp"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BudgetApp.Views.ParentView"
+			 x:DataType="vm:ParentViewModel">
+	<Design.DataContext>
+		<vm:ParentViewModel />
+	</Design.DataContext>
+	<UserControl.DataTemplates>
+		<local:ViewLocator/>
+	</UserControl.DataTemplates>
+	<UserControl.Styles>
+		<Style Selector="MenuItem">
+			<Setter Property="Padding" Value="10 20" />
+		</Style>
+	</UserControl.Styles>
+	<Panel>
+		<ExperimentalAcrylicBorder IsHitTestVisible="False">
+			<ExperimentalAcrylicBorder.Material>
+				<ExperimentalAcrylicMaterial
+					BackgroundSource="Digger"
+					TintColor="Black"
+					TintOpacity="1"
+					MaterialOpacity="0.65" />
+			</ExperimentalAcrylicBorder.Material>
+		</ExperimentalAcrylicBorder>
+		<SplitView DisplayMode="Overlay" IsPaneOpen="{Binding MenuOpen}" OpenPaneLength="120" PaneClosed="SplitView_PaneClosed">
+			<SplitView.Pane >
+				<Grid RowDefinitions="auto,*">
+					<StackPanel Grid.Row="0">
+						<MenuItem Header="Expenses" Command="{Binding ExpensesCommand}"/>
+						<Separator />
+						<MenuItem Header="Income" Command="{Binding	IncomeCommand}"/>
+						<Separator />
+						<MenuItem Header="Budget" Command="{Binding	BudgetCommand}" />
+						<Separator />
+					</StackPanel>
+					<StackPanel Grid.Row="1" VerticalAlignment="Bottom">
+						<Separator />
+						<MenuItem Header="Log Out" Command="{Binding LogoutCommand}"/>
+					</StackPanel>
+				</Grid>
+			</SplitView.Pane>
+			<Grid RowDefinitions="Auto, *">
+				<Button Command="{Binding MenuClickCommand}" Width ="50" Background ="Transparent" VerticalAlignment="Top">
+					<Image Source="/Assets/Images/hamburger-md.png"/>
+				</Button>
+				<ContentControl Grid.Row="0" Grid.RowSpan="2" Content="{Binding ContentViewModel}"/>
+			</Grid>
+		</SplitView>
+	</Panel>
+</UserControl>

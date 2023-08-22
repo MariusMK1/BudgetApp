@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:BudgetApp.ViewModels"
+             xmlns:views="clr-namespace:BudgetApp.Views"
+			 xmlns:local="clr-namespace:BudgetApp"
+			 xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="365" d:DesignHeight="650"
+             x:Class="BudgetApp.Views.MainView"
+             x:DataType="vm:MainViewModel">
+	<Design.DataContext>
+		<vm:MainViewModel />
+	</Design.DataContext>
+	<UserControl.DataTemplates>
+		<local:ViewLocator/>
+	</UserControl.DataTemplates>
+	<UserControl.Styles>
+		<Style Selector="Button.Modify">
+			<Setter Property="Margin" Value="10 0 10 5"/>
+			<Setter Property="FontSize" Value="20"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="Button.Small">
+			<Setter Property="Width" Value="40"/>
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Margin" Value="0 0 0 10"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="CornerRadius" Value="20"/>
+			<Setter Property="VerticalAlignment" Value="Bottom"/>
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="Button.Big">
+			<Setter Property="Width" Value="60"/>
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Margin" Value="0 0 0 10"/>
+			<Setter Property="Padding" Value="-5"/>
+			<Setter Property="VerticalAlignment" Value="Bottom"/>
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+		</Style>
+	</UserControl.Styles>
+	<ContentControl Content="{Binding ChildViewModel}"/>
+</UserControl>

@@ -1,0 +1,86 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:BudgetApp.ViewModels"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BudgetApp.Views.IncomesView"
+			 x:DataType="vm:IncomesViewModel">
+	<Design.DataContext>
+		<vm:IncomesViewModel />
+	</Design.DataContext>
+	<Grid RowDefinitions="*, auto, auto" ColumnDefinitions="*, *, *, *, *">
+		<Grid Grid.ColumnSpan="5" HorizontalAlignment="Stretch" VerticalAlignment="Top" RowDefinitions="Auto, *">
+			<StackPanel>
+				<TextBlock Text="Income" HorizontalAlignment="Center" FontSize="20" Margin="10" Padding="0"/>
+				<Separator Height="2" Background="Black" Margin="0 0 0 2"/>
+			</StackPanel>
+			<ScrollViewer Grid.Row="1">
+				<ListBox ItemsSource="{Binding Incomes}" SelectedItem="{Binding SelectedIncomeViewModel}" Background="Transparent" >
+					<ListBox.Styles>
+						<Style Selector="ListBoxItem">
+
+							<Setter	Property="CornerRadius" Value="30"/>
+							<Setter	Property="Margin" Value="2"/>
+							<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+						</Style>
+					</ListBox.Styles>
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+								<TextBlock Text="{Binding Name}" Margin="5"/>
+								<TextBlock Text="{Binding Amount, StringFormat={}{0} €}}" Margin="5"/>
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</ScrollViewer>
+		</Grid>
+		<Border Grid.Row="1"
+		Grid.ColumnSpan="5"
+		Margin="10"
+		Padding="5"
+		BorderBrush="White"
+		BorderThickness="1"
+		CornerRadius="5"
+		VerticalAlignment="Bottom"
+		HorizontalAlignment="Center"
+		IsVisible="{Binding	AddedIncome}">
+			<TextBlock Text="You added an income" FontSize="15"/>
+		</Border>
+		<Button Classes="Small"
+				Grid.Row="2"
+				Grid.Column="0"
+				Command="{Binding CreateNewIncomeCommand}">
+			<Image Source="/Assets/Images/add-circle.png"/>
+		</Button>
+		<Button Classes="Small"
+				Grid.Row="2"
+				Grid.Column="1"
+				Command="{Binding ModifyIncomeCommand}"
+				IsEnabled="{Binding	IsSelected }">
+			<Image Source="/Assets/Images/modify-line.png"/>
+		</Button>
+		<Button Classes="Big"
+				Grid.Row="2"
+				Grid.Column="2"
+				Command="{Binding AddIncomeCommand}"
+				IsEnabled="{Binding	IsSelected }">
+			<Image Source="/Assets/Images/add-square.png"/>
+		</Button>
+		<Button Classes="Small"
+				Grid.Row="2"
+				Grid.Column="3"
+				Command="{Binding CopyIncomeCommand}"
+				IsEnabled="{Binding	IsSelected }">
+			<Image Source="/Assets/Images/copy.png"/>
+		</Button>
+		<Button Classes="Small"
+				Grid.Row="2"
+				Grid.Column="4"
+				Command="{Binding DeleteIncomeCommand}"
+				IsEnabled="{Binding	IsSelected }">
+			<Image Source="/Assets/Images/delete.png"/>
+		</Button>
+	</Grid>
+</UserControl>
