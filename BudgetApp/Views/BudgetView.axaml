@@ -58,7 +58,8 @@
 					  Series="{Binding Series}"
 					  InitialRotation="-90"
 					  MaxAngle="270"
-					  Total="{Binding Total}"
+					  MinValue="0"
+					  MaxValue="{Binding Total}"
 					  IsVisible="{Binding !UseRacingBars}">
 		</lvc:PieChart>
 		<lvc:CartesianChart

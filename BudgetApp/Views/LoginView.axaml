@@ -18,7 +18,7 @@
 				<Label Content="Password" Margin="10 10 10 0"/>
 				<TextBox Text="{Binding	Password, Mode=TwoWay}" Margin="10 0 10 10" PasswordChar="*"/>
 				<TextBlock Text="{Binding ErrorMessage}" IsVisible="{Binding ShowError}" Foreground="Red" Margin="10"/>
-				<CheckBox Content="Remember me" Margin="10 10 10 0" IsChecked="{Binding RememberMe}"/>
+				<!--<CheckBox Content="Remember me" Margin="10 10 10 0" IsChecked="{Binding RememberMe}"/>-->
 			</StackPanel>
 			<StackPanel Grid.Row="2" VerticalAlignment="Bottom">
 				<Button Classes="Modify" Content="Log in" Command="{Binding LoginCommand}" IsEnabled="{Binding CanLogin}"/>
