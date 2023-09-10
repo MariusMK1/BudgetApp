@@ -29,7 +29,7 @@
 					MaterialOpacity="0.65" />
 			</ExperimentalAcrylicBorder.Material>
 		</ExperimentalAcrylicBorder>
-		<SplitView DisplayMode="Overlay" IsPaneOpen="{Binding MenuOpen}" OpenPaneLength="120" PaneClosed="SplitView_PaneClosed">
+		<SplitView DisplayMode="Overlay" ZIndex="" IsPaneOpen="{Binding MenuOpen}" OpenPaneLength="120" PaneClosed="SplitView_PaneClosed">
 			<SplitView.Pane >
 				<Grid RowDefinitions="auto,*">
 					<StackPanel Grid.Row="0">
