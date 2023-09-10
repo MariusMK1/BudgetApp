@@ -15,7 +15,7 @@ using System.Xml.Linq;
 
 namespace BudgetApp.ViewModels;
 
-public partial class IncomesViewModel: ViewModelBase
+public partial class IncomesViewModel: MenuViewModel
 {
     [ObservableProperty] private string _name;
     [ObservableProperty] private IncomeViewModel? _selectedIncomeViewModel;

@@ -12,11 +12,4 @@ public partial class ParentView : UserControl
     {
         InitializeComponent();
     }
-    private void SplitView_PaneClosed(object sender, RoutedEventArgs e)
-    {
-        if (DataContext is ParentViewModel viewModel)
-        {
-            viewModel.OnPaneClosed();
-        }
-    }
 }

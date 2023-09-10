@@ -19,39 +19,5 @@
 			<Setter Property="Padding" Value="10 20" />
 		</Style>
 	</UserControl.Styles>
-	<Panel>
-		<ExperimentalAcrylicBorder IsHitTestVisible="False">
-			<ExperimentalAcrylicBorder.Material>
-				<ExperimentalAcrylicMaterial
-					BackgroundSource="Digger"
-					TintColor="Black"
-					TintOpacity="1"
-					MaterialOpacity="0.65" />
-			</ExperimentalAcrylicBorder.Material>
-		</ExperimentalAcrylicBorder>
-		<SplitView DisplayMode="Overlay" ZIndex="" IsPaneOpen="{Binding MenuOpen}" OpenPaneLength="120" PaneClosed="SplitView_PaneClosed">
-			<SplitView.Pane >
-				<Grid RowDefinitions="auto,*">
-					<StackPanel Grid.Row="0">
-						<MenuItem Header="Expenses" Command="{Binding ExpensesCommand}"/>
-						<Separator />
-						<MenuItem Header="Income" Command="{Binding	IncomeCommand}"/>
-						<Separator />
-						<MenuItem Header="Budget" Command="{Binding	BudgetCommand}" />
-						<Separator />
-					</StackPanel>
-					<StackPanel Grid.Row="1" VerticalAlignment="Bottom">
-						<Separator />
-						<MenuItem Header="Log Out" Command="{Binding LogoutCommand}"/>
-					</StackPanel>
-				</Grid>
-			</SplitView.Pane>
-			<Grid RowDefinitions="Auto, *">
-				<Button Command="{Binding MenuClickCommand}" Width ="50" Background ="Transparent" VerticalAlignment="Top">
-					<Image Source="/Assets/Images/hamburger-md.png"/>
-				</Button>
-				<ContentControl Grid.Row="0" Grid.RowSpan="2" Content="{Binding ContentViewModel}"/>
-			</Grid>
-		</SplitView>
-	</Panel>
+	<ContentControl Grid.Row="0" Grid.RowSpan="2" Content="{Binding ContentViewModel}"/>
 </UserControl>

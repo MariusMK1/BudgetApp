@@ -4,16 +4,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BudgetApp.ViewModels;
 
 public partial class ParentViewModel : ViewModelBase
 {
-    [ObservableProperty] private bool _menuOpen;
     [ObservableProperty] private ViewModelBase _contentViewModel;
     private IncomesViewModel? _incomesViewModel { get; set; }
     private ExpensesViewModel? _expensesViewModel { get; set; }
@@ -22,27 +18,32 @@ public partial class ParentViewModel : ViewModelBase
     public event EventHandler? PaneClosed;
     public ParentViewModel(IMessenger messenger) : base(messenger)
     {
-        Messenger.Register<ChangeViewModelMessage>(this, OnViewCreated);
-        Messenger.Register<AddedIncomeOrExpense>(this, NullBudegetViewModel);
         ContentViewModel = new();
     }
 
     public async Task Initialize()
     {
+        Messenger.Register<ChangeViewModelMessage>(this, async (recipient, message) => await OnViewCreated(recipient, message));
+        Messenger.Register<AddedIncomeOrExpense>(this, NullBudegetViewModel);
         _expensesViewModel = new ExpensesViewModel(Messenger);
         await _expensesViewModel.Initialize();
         ContentViewModel = _expensesViewModel;
     }
-    public void OnPaneClosed()
-    {
-        MenuOpen = false;
-    }
-    private void OnViewCreated(object recipient, ChangeViewModelMessage message)
+    private async Task OnViewCreated(object recipient, ChangeViewModelMessage message)
     {
         if (message.ViewModel is not null)
         {
-            _previousViewModel = ContentViewModel;
-            ContentViewModel = message.ViewModel;
+            if (message.ViewModel is BudgetViewModel)
+                await Budget();
+            else if (message.ViewModel is ExpensesViewModel)
+                Expenses();
+            else if (message.ViewModel is IncomesViewModel)
+                await Income();
+            else if (message.ViewModel is ExpenseViewModel || message.ViewModel is IncomeViewModel)
+            {
+                _previousViewModel = ContentViewModel;
+                ContentViewModel = message.ViewModel;
+            }
         }
         else
         {
@@ -55,45 +56,32 @@ public partial class ParentViewModel : ViewModelBase
     {
         _budgetViewModel = null;
     }
-    [RelayCommand]
-    private void MenuClick()
-    {
-        MenuOpen = true;
-    }
-    [RelayCommand]
-    private void CloseMenu(PointerPressedEventArgs args)
-    {
-        MenuOpen = false;
-    }
-    [RelayCommand]
-    private async Task Budget(PointerPressedEventArgs args)
+    private async Task Budget()
     {
         if (_budgetViewModel is null)
         {
-            _budgetViewModel = new BudgetViewModel();
+            _budgetViewModel = new BudgetViewModel(Messenger);
             await _budgetViewModel.Initialize();
         }
+        _previousViewModel = ContentViewModel;
         ContentViewModel = _budgetViewModel;
-        MenuOpen = false;
     }
-    [RelayCommand]
-    private void Expenses(PointerPressedEventArgs args)
+    private void Expenses()
     {
         if (_expensesViewModel is null)
             _expensesViewModel = new ExpensesViewModel(Messenger);
+        _previousViewModel = ContentViewModel;
         ContentViewModel = _expensesViewModel;
-        MenuOpen = false;
     }
-    [RelayCommand]
-    private async Task Income(PointerPressedEventArgs args)
+    private async Task Income()
     {
         if (_incomesViewModel is null)
         {
             _incomesViewModel = new IncomesViewModel(Messenger);
             await _incomesViewModel.Initialize();
         }
+        _previousViewModel = ContentViewModel;
         ContentViewModel = _incomesViewModel;
-        MenuOpen = false;
     }
     [RelayCommand]
     private void Logout(PointerPressedEventArgs args)

@@ -17,10 +17,11 @@ using LiveChartsCore.Defaults;
 using LiveChartsCore.Drawing;
 using Avalonia;
 using LiveChartsCore.Kernel;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace BudgetApp.ViewModels;
 
-public partial class BudgetViewModel : ViewModelBase
+public partial class BudgetViewModel : MenuViewModel
 {
     [ObservableProperty] IEnumerable<ISeries>? _series = new List<ISeries>();
     public List<Expense> Expenses = new();
@@ -44,7 +45,7 @@ public partial class BudgetViewModel : ViewModelBase
     public ObservableCollection<string> Tags { get; set; }
     public ObservableCollection<string> SelectedTags { get; set; }
     private Random random = new();
-    public BudgetViewModel()
+    public BudgetViewModel(IMessenger messenger): base(messenger)
     {
         Months = new();
         Tags = new();

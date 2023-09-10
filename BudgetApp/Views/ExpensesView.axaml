@@ -14,6 +14,11 @@
 			<StackPanel>
 				<TextBlock Text="Expenses" HorizontalAlignment="Center" FontSize="20" Margin="10" Padding="0"/>
 				<Separator Height="2" Background="Black" Margin="0 0 0 2"/>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+					<Button Command="{Binding ExpensesCommand}" Content="Expense" Margin="5"/>
+					<Button Command="{Binding IncomeCommand}" Content="Income" Margin="5"/>
+					<Button Command="{Binding BudgetCommand}" Content="Budget" Margin="5"/>
+				</StackPanel>
 			</StackPanel>
 			<ScrollViewer Grid.Row="1">
 				<ListBox ItemsSource="{Binding Expenses}" SelectedItem="{Binding SelectedExpenseViewModel}" Background="Transparent" >
