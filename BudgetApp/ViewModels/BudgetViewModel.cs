@@ -45,7 +45,7 @@ public partial class BudgetViewModel : MenuViewModel
     public ObservableCollection<string> Tags { get; set; }
     public ObservableCollection<string> SelectedTags { get; set; }
     private Random random = new();
-    public BudgetViewModel(IMessenger messenger): base(messenger)
+    public BudgetViewModel(IMessenger messenger) : base(messenger)
     {
         Months = new();
         Tags = new();
@@ -86,7 +86,7 @@ public partial class BudgetViewModel : MenuViewModel
             ("Expense", TotalExpense),
             ("Income", TotalIncome)
         };
-        foreach(var tag in SelectedTags)
+        foreach (var tag in SelectedTags)
         {
             var incomesByTag = Incomes.Where(x => x.Tag == tag);
             var expensesByTag = Expenses.Where(x => x.Tag == tag);
@@ -180,7 +180,8 @@ public partial class BudgetViewModel : MenuViewModel
         var uniqueExpenseTags = Expenses.Select(expense => expense.Tag).Distinct().ToList();
         var uniqueTags = uniqueIncomeTags.Union(uniqueExpenseTags).Distinct().ToList();
         foreach (var tag in uniqueTags)
-            Tags.Add(tag);
+            if (!string.IsNullOrEmpty(tag))
+                Tags.Add(tag);
     }
 
     private void CalculateTotals(List<Income> incomes, List<Expense> expenses)

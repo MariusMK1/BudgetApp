@@ -3,7 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:BudgetApp.ViewModels"
-			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+			 mc:Ignorable="d" d:DesignWidth="390" d:DesignHeight="844"
              x:Class="BudgetApp.Views.IncomesView"
 			 x:DataType="vm:IncomesViewModel">
 	<Design.DataContext>
@@ -16,7 +17,7 @@
 				<Separator Height="2" Background="Black" Margin="0 0 0 2"/>
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<Button Command="{Binding ExpensesCommand}" Content="Expense" Margin="5"/>
-					<Button Command="{Binding IncomeCommand}" Content="Income" Margin="5"/>
+					<Button Command="{Binding IncomeCommand}" Content="Income" Margin="20 5"/>
 					<Button Command="{Binding BudgetCommand}" Content="Budget" Margin="5"/>
 				</StackPanel>
 			</StackPanel>
@@ -53,39 +54,68 @@
 		IsVisible="{Binding	AddedIncome}">
 			<TextBlock Text="You added an income" FontSize="15"/>
 		</Border>
+		<Canvas Grid.Row="2" Grid.ColumnSpan="5" Height="80" Background="Transparent" VerticalAlignment="Bottom">
+			<Path Fill="{DynamicResource PrimaryHueLightBrush}" Stroke="DarkBlue">
+				<Path.Data>
+					<GeometryGroup>
+						<PathGeometry>
+							<PathGeometry.Figures>
+								<PathFigure StartPoint="0,25">
+									<PathFigure.Segments>
+										<LineSegment Point="0,80"/>
+										<LineSegment Point="390,80"/>
+										<LineSegment Point="390,25"/>
+										<LineSegment Point="245,25"/>
+										<ArcSegment Size="60, 60" Point="145,25" SweepDirection="CounterClockwise"/>
+									</PathFigure.Segments>
+								</PathFigure>
+							</PathGeometry.Figures>
+						</PathGeometry>
+					</GeometryGroup>
+				</Path.Data>
+				<Path.OpacityMask>
+					<LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+						<LinearGradientBrush.GradientStops>
+							<GradientStop Offset="0" Color="Black"/>
+							<GradientStop Offset="1" Color="Transparent"/>
+						</LinearGradientBrush.GradientStops>
+					</LinearGradientBrush>
+				</Path.OpacityMask>
+			</Path>
+		</Canvas>
 		<Button Classes="Small"
 				Grid.Row="2"
 				Grid.Column="0"
 				Command="{Binding CreateNewIncomeCommand}">
-			<Image Source="/Assets/Images/add-circle.png"/>
+			<materialIcons:MaterialIcon Kind="Plus" Foreground="White" Height="40" Width="40" />
 		</Button>
 		<Button Classes="Small"
 				Grid.Row="2"
 				Grid.Column="1"
 				Command="{Binding ModifyIncomeCommand}"
 				IsEnabled="{Binding	IsSelected }">
-			<Image Source="/Assets/Images/modify-line.png"/>
+			<materialIcons:MaterialIcon Kind="PencilOutline" Foreground="White" Height="40" Width="40" />
 		</Button>
 		<Button Classes="Big"
 				Grid.Row="2"
 				Grid.Column="2"
 				Command="{Binding AddIncomeCommand}"
 				IsEnabled="{Binding	IsSelected }">
-			<Image Source="/Assets/Images/add-square.png"/>
+			<materialIcons:MaterialIcon Kind="PlusThick" Foreground="White" Height="60" Width="60" />
 		</Button>
 		<Button Classes="Small"
 				Grid.Row="2"
 				Grid.Column="3"
 				Command="{Binding CopyIncomeCommand}"
 				IsEnabled="{Binding	IsSelected }">
-			<Image Source="/Assets/Images/copy.png"/>
+			<materialIcons:MaterialIcon Kind="ContentCopy" Foreground="White" Height="40" Width="40" />
 		</Button>
 		<Button Classes="Small"
 				Grid.Row="2"
 				Grid.Column="4"
 				Command="{Binding DeleteIncomeCommand}"
 				IsEnabled="{Binding	IsSelected }">
-			<Image Source="/Assets/Images/delete.png"/>
+			<materialIcons:MaterialIcon Kind="BinOutline" Foreground="White" Height="40" Width="40" />
 		</Button>
 	</Grid>
 </UserControl>

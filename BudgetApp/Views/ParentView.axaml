@@ -5,7 +5,7 @@
 			 xmlns:vm="clr-namespace:BudgetApp.ViewModels"
 			 xmlns:views="clr-namespace:BudgetApp.Views"
 			 xmlns:local="clr-namespace:BudgetApp"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="390" d:DesignHeight="844"
              x:Class="BudgetApp.Views.ParentView"
 			 x:DataType="vm:ParentViewModel">
 	<Design.DataContext>

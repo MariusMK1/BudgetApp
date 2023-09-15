@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="clr-namespace:BudgetApp.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="365" d:DesignHeight="650"
+             mc:Ignorable="d" d:DesignWidth="390" d:DesignHeight="844"
              x:Class="BudgetApp.Views.IncomeView"
 			 x:DataType="vm:IncomeViewModel">
 	<Design.DataContext>

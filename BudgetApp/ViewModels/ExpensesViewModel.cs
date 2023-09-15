@@ -1,4 +1,6 @@
-﻿using BudgetApp.Helpers;
+﻿using Avalonia;
+using Avalonia.Controls;
+using BudgetApp.Helpers;
 using BudgetApp.Messages;
 using BudgetApp.Models;
 using CommunityToolkit.Mvvm.ComponentModel;

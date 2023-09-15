@@ -4,14 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:BudgetApp.Views"
-        mc:Ignorable="d" d:DesignWidth="365" d:DesignHeight="650"
+        mc:Ignorable="d" d:DesignWidth="390" d:DesignHeight="844"
         x:Class="BudgetApp.Views.MainWindow"
         Icon="/Assets/Logo.ico"
         Title="BudgetApp"
-		Height="650"
-		Width="365"
-		TransparencyLevelHint="AcrylicBlur"
-        Background="Transparent"
+		Height="844"
+		Width="390"
 		ExtendClientAreaToDecorationsHint="True">
 	<views:MainView />
 </Window>
